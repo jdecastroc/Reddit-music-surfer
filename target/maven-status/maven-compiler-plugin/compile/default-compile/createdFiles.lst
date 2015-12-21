@@ -1,0 +1,5 @@
+crawlers\Surfer.class
+crawlers\RedditList.class
+rest\controller\CrawlerController.class
+rest\controller\Application.class
+crawlers\Reddit.class
