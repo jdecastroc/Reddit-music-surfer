@@ -43,3 +43,4 @@ local.properties
 
 #Personal
 jsoup-1.8.2.jar
+/target/

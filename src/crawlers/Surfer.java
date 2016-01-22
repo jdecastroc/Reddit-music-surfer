@@ -33,7 +33,7 @@ import com.google.gson.*;
 //import java.util.List;
 
 //Leer: <a class="thumbnail may-blank " href="https://www.youtube.com/watch?v=L58yMnuJ4kc"><img src="//b.thumbs.redditmedia.com/HZPv-qPp0gpLN1RolH8aGGfu-N0QkMQGLxtuh26qCCY.jpg" width="70" height="52" alt=""></a>
-//Siguiente pagina en <a href="https://www.reddit.com/r/japanesemusic/?count=25&amp;after=t3_3cjmvv" rel="nofollow next">siguiente ›</a>
+//Siguiente pagina en <a href="https://www.reddit.com/r/japanesemusic/?count=25&amp;after=t3_3cjmvv" rel="nofollow next">siguiente ï¿½</a>
 
 
 public class Surfer {
@@ -104,7 +104,7 @@ public class Surfer {
 	 */
 	public static Vector<String> surfReddit(String web, Vector<String> listaLinks, int pages) throws IOException{
 			
-			pages--; //Atributo principal para salir de la recursión
+			pages--; //Atributo principal para salir de la recursiï¿½n
 			Document doc = Jsoup.connect(web).userAgent("web:com.ReddMusic.surfReddit:v1 by /u/hoppy93").timeout(0).get();
 			Elements links = doc.select("a[href]"); //Cogemos todos los links que siguen este patron
 			String output = "";
@@ -124,17 +124,19 @@ public class Surfer {
 							  listaLinks.addElement(linkHref);
 					  }
 					  //Patron de busqueda para links de soundcloud
-					  if (match("soundcl",linkHref) && !match("reddit",linkHref)){
-						  if (!listaLinks.contains(linkHref))
-							  listaLinks.addElement(linkHref);
-					  }
+					  //TODO FRONTEND doesn't accept soundcloud links yet
+//					  if (match("soundcl",linkHref) && !match("reddit",linkHref)){
+//						  if (!listaLinks.contains(linkHref))
+//							  listaLinks.addElement(linkHref);
+//					  }
 				}
 			}
 			if (pages == 0)
 				return listaLinks;
 			else{
-				try { 
-					Thread.sleep(5000); //Necessary to make another request for the following pages after first one
+				try {
+					//Put down it to 500 to speed-up the operations
+					Thread.sleep(500); //Necessary to make another request for the following pages after first one
 					} 
 				catch(InterruptedException e) { 
 					} 
