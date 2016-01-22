@@ -1,5 +1,5 @@
-crawlers\Surfer.class
 crawlers\RedditList.class
 rest\controller\CrawlerController.class
 rest\controller\Application.class
+crawlers\Surfer.class
 crawlers\Reddit.class

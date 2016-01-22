@@ -12,7 +12,7 @@
 
 	function main_page($data, $json_url){
 	?>
-		&nbsp;&nbsp;<h1>Reddit music Surfer (Alpha version)</h1>
+		<h1>Reddit music Surfer (Alpha version)</h1>
 		<p>Welcome to Reddit music Surfer!</p>
 		<ul>
 			<li> 1.- Select how many songs do you wanna surf from each music Reddit! </li>
@@ -69,15 +69,15 @@
     }
 
     function video_page($data, $json_url){
-
+    	$show_yt = true;
     	static $api_key = "AIzaSyDnTgE16CbFl6gXSeEvKzx1rLdsVCW2tq0";
     ?>
 		<div class="row">
-        	<div class="col-md-8">
+        	<div class="col-md-8" id="player_container">
             	<div class="well">
                 	<div class="text-center">
-                    	&nbsp;&nbsp;<h1>Reddit music Surfer (Alpha version)</h1>
-		  				<h3>URL: <h3><?php echo $json_url;?>;
+                    	<h2>Reddit music Surfer (Alpha version)</h2><hr class="hr-tags"/>
+		  				<!--<h3>URL: <h3><?php echo $json_url;?>;-->
 		  				<?php
 	                 	$delete = array("https://www.youtube.com/watch?v=", "https://youtu.be/", "http://youtu.be/", "http://www.youtube.com/watch?v=",
 	                 				 "https://m.youtube.com/watch?v=", "http://m.youtube.com/watch?v=");
@@ -86,12 +86,25 @@
 	            			$link = str_replace($delete,"",$data[$counter]);
 	            			$data[$counter] = $link;
 	                	}
+	                	if ($data == null){
+	                		$show_yt = false;
+	                	}
+	                	
 	                	?>
-
 		  				<!--Sidebar content-->
 		      			<!-- YOUTUBE PLAYER CODE STARTS -->
-						<div id="player"></div> 
-			
+
+		      			<?php 
+		      			if ($show_yt) { //If there are youtube links, show YT player and buttons
+		      			?>
+						<div id="player"></div>
+						<button type="button" onclick = 'previousVideo()' class="btn btn-primary">Previous video</button>
+		    			<button type="button" onclick = 'nextVideo()' class="btn btn-primary">Next video</button>
+						<?php
+						} else {	//If not, error message
+						echo "<h3>Ooops! Seem's like there is nothing in this reddit. Try a new Playlist! :D</h3>";
+						}?>
+
 						<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
 		    			<!-- https://developers.google.com/youtube/iframe_api_reference -->
 		    			<!-- <script src="js/video.js"></script> -->
@@ -112,10 +125,10 @@
 						      		height: '390',
 						        	width: '640',
 						        	videoId: jArray[song_counter],
-						        	//videoId: jArray[song_counter],
 						        	events: {
 						        		'onReady': onPlayerReady,
-						            	'onStateChange': onPlayerStateChange
+						            	'onStateChange': onPlayerStateChange,
+						            	'onError': onPlayerError
 						        	}
 						        });
 						    }
@@ -134,6 +147,11 @@
 						    		song_counter++;
 						    		player.loadVideoById(jArray[song_counter]);
 						        }
+						    }
+
+						    function onPlayerError(event) {
+						    		song_counter++;
+						    		player.loadVideoById(jArray[song_counter]);
 						    }
 
 						    function stopVideo() {
@@ -159,44 +177,48 @@
 						    }
 						</script>
 		    			<!-- YOUTUBE PLAYER CODE FINISH -->
-		    			<button type="button" onclick = 'previousVideo()' class="btn btn-primary">Previous video</button>
-		    			<button type="button" onclick = 'nextVideo()' class="btn btn-primary">Next video</button>
                		</div>
             	</div>
         	</div>
-        <div class="col-md-3">
-            <div class="well">
-                <button type="button" class="btn btn-info" onclick="location.href = 'http://localhost/redditMusic/index.php';">New playlist</button> 
-                <br /><br /><br /><br /><br /><br /><br />
-            </div>
-            <div class="well">
-                <strong>Playlist</strong><hr class="hr-tags"/>
-                <?php for($counter = 0; $counter < count($data); $counter++)
-	            {
-	            $video_info = "https://www.googleapis.com/youtube/v3/videos?id=".$data[$counter]."&key=".$api_key."&part=snippet"."&fields=items(snippet(title))&part=snippet";
-	            
-	            $json_info = file_get_contents($video_info);
-	            $vidName =json_decode($json_info, true);
+        	<div class="col-md-4">
+	            <div class="well">
+	                <h2>Playlist</h2><hr class="hr-tags"/>
+	               	
 
-	            if(empty($vidName['items'][0]['snippet']['title']))
-	            {
-            	$vName = $data[$counter];
-            	}
-            	else {
-	            $vName = $vidName['items'][0]['snippet']['title'];
-	        	}
+	                <ul class="media-list main-list" id="links_container">
+	                <?php for($counter = 0; $counter < count($data); $counter++)
+		            {
+			            $video_info = "https://www.googleapis.com/youtube/v3/videos?id=".$data[$counter]."&key=".$api_key."&part=snippet"."&fields=items(snippet(title))&part=snippet";
+			            
+			            $json_info = file_get_contents($video_info);
+			            $vidName =json_decode($json_info, true);
 
-	            ?>
-	            <button type="button" onclick = "playThisVideo('<?php echo $data[$counter]?>')" class="btn btn-primary"><?php echo $vName?></button><br />
-	            <?php
+			            if(empty($vidName['items'][0]['snippet']['title']))
+			            {
+		            	$vName = $data[$counter];
+		            	}
+		            	else {
+			            $vName = $vidName['items'][0]['snippet']['title'];
+			        	}
 
+			            ?>
+			            <li class="media">
+						    <a class="pull-left" href="#">
+						      <img class="media-object" src="<?php echo getYtImage($data[$counter])?>" alt="...">
+						    </a>
+						    <div class="media-body">
+						      <h4 class="media-heading"><a href="#" onclick = "playThisVideo('<?php echo $data[$counter]?>')"><?php echo $vName?></a></h4>
+						    </div>
+						</li>
+			            
+			            <?php
+		            }
 
-	            }
-	            ?>
-	            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            </div>
-        </div>
-    </div>
+		            ?>
+		        	</ul>
+	            </div>
+        	</div>
+    	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js"></script>
@@ -209,5 +231,10 @@
 		<p>Welcome to Reddit music Surfer!</p>
 		<p>There is a problem retrieving the data from the server, please try again later</p>
 		<?php
+    }
+
+    function getYtImage($url) {
+    	$tmp = "http://img.youtube.com/vi/".$url."/default.jpg";
+    	return $tmp;
     }
     ?>

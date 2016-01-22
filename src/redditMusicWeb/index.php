@@ -3,31 +3,31 @@
 include 'main_page.php';
 //error_reporting, after manage the warnings and errors
 //error_reporting(0);
-	if(isset($_POST['mode']) && isset($_POST['random']) && !empty($_POST['reddits'])) 
-	{
-		$page = "video";
-	    $mode_r = $_POST['mode'];
-	    $random_r = $_POST['random'];
-	    $redditsPhpList = $_POST['reddits'];
-	    $N = count($redditsPhpList);
-	    $listaRedditFinal = "";
- 		
-	    for($i=0; $i < $N; $i++)
-	    {
-	    	$redditsPhpList[$i] = str_replace("/r/","",$redditsPhpList[$i]);
-	    	$listaRedditFinal = $listaRedditFinal.$redditsPhpList[$i];
-	    	if ($i != $N-1){
-	    	$listaRedditFinal = $listaRedditFinal.",";
-	    	}
-	    }
-	    $json_url = "http://localhost:8080/playlist?redditList=".$listaRedditFinal."&mode=".$mode_r."&random=".$random_r;
-	    $json = file_get_contents($json_url);
-		  $data = json_decode($json, TRUE);
-	}
-	else
-	{
-		$page = "main";
-		$json_url = "http://localhost:8080/redditList";
+  if(isset($_POST['mode']) && isset($_POST['random']) && !empty($_POST['reddits'])) 
+  {
+    $page = "video";
+      $mode_r = $_POST['mode'];
+      $random_r = $_POST['random'];
+      $redditsPhpList = $_POST['reddits'];
+      $N = count($redditsPhpList);
+      $listaRedditFinal = "";
+    
+      for($i=0; $i < $N; $i++)
+      {
+        $redditsPhpList[$i] = str_replace("/r/","",$redditsPhpList[$i]);
+        $listaRedditFinal = $listaRedditFinal.$redditsPhpList[$i];
+        if ($i != $N-1){
+        $listaRedditFinal = $listaRedditFinal.",";
+        }
+      }
+      $json_url = "http://localhost:8080/playlist?redditList=".$listaRedditFinal."&mode=".$mode_r."&random=".$random_r;
+      $json = file_get_contents($json_url);
+      $data = json_decode($json, TRUE);
+  }
+  else
+  {
+    $page = "main";
+    $json_url = "http://localhost:8080/redditList";
     if (file_get_contents($json_url) === FALSE)
     {
       $page = "main_server_error";
@@ -37,7 +37,7 @@ include 'main_page.php';
     $json = file_get_contents($json_url);
     $data = json_decode($json, TRUE);
     }
-	}    
+  }    
 ?>
 
 <!DOCTYPE html>
@@ -90,38 +90,33 @@ include 'main_page.php';
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-                
+                <li><a href="#">English</a></li>
+                <li><a href="#">Spanish</a></li>
+                <li><a href="#">Japanese</a></li>
               </ul>
+            <li><p class="navbar-btn"><input type="button" class="btn btn-info" onclick="location.href='http://localhost/index.php';" value="New playlist!" /></p></li>
             </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-		    
+        
 
-	<div class="container" id="container_index">
+  <div class="container" id="container_index">
 
-		<?php
-		if ($page == "main"){
-			main_page($data, $json_url);
-		} else if ($page == "video"){
-			video_page($data, $json_url);
-		} else if ($page == "main_server_error"){
+    <?php
+    if ($page == "main"){
+      main_page($data, $json_url);
+    } else if ($page == "video"){
+      video_page($data, $json_url);
+    } else if ($page == "main_server_error"){
       main_page_error();
     }
 
-		?>
+    ?>
     
   </div> <!-- /container_index -->
 
