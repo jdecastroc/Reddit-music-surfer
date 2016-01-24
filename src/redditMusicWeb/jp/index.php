@@ -88,7 +88,7 @@ include 'header.php';
     } else if ($page == "main_server_error"){
       main_page_error();
     }
-    showFooter();
+    showFooter($lang);
     ?>
     
   </div> <!-- /container_index -->

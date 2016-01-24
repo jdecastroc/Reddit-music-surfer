@@ -43,7 +43,7 @@ function showFooter($lang) {
             </div>
             <div class="col-md-4 text-center">
               <p style="font-size:80%;">Music surfer es una web crawler hecho para disfrutar la música de reddit</p>
-              <p style="font-size:80%;">Copyright (C) 2015 <a href="https://github.com/jdecastroc/Reddit-music-surfer">@jdecastroc</p></a>
+              <p style="font-size:80%;">Copyright (C) 2015 <a href="https://github.com/jdecastroc">@jdecastroc</p></a>
               <p style="font-size:80%;">Reddit is a trademark of Reddit Inc.</p>
             </div>
             <div class="col-md-4 text-center">

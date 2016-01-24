@@ -53,7 +53,7 @@ public class Surfer {
 				.userAgent("web:com.ReddMusic.surfReddit:v1.3 ALPHA by /u/hoppy93").timeout(0).get();
 		Elements links = doc.select("h2, li, a");
 		// result = input.split("-")[0];
-		String title = "", hrefText = "", splitText = "";
+		String title = "", hrefText = "";
 		for (Element element : links) {
 			if (element.tagName().equals("h2")) {
 				title = element.select("h2").text();
