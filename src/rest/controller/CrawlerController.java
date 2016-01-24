@@ -1,5 +1,10 @@
 /**
+ * RESTFul service
  * 
+ * @author: hoppy93
+ * @version: 24/01/2016/A
+ * @see <a href = "https://github.com/jdecastroc/Reddit-music-surfer" /> Github
+ *      repository </a>
  */
 package rest.controller;
 
@@ -14,11 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author hoppy93
- * 
- * http://localhost:8080/playlist?redditList=japanesemusic,electronicmusic&mode=0&random=false
- */
 @RestController
 public class CrawlerController {
 

@@ -5,7 +5,7 @@ It provides a music genre list based in https://www.reddit.com/r/Music/wiki/musi
 Through the selection of the different reddits, the application crawl the selected music reddits taking the 
 music links and providing them to the application player.
 
-#Actual version: ALPHA v1.1
+#Actual version: ALPHA v1.3
 #Link: http://51.255.202.84/
 
 #Used technologies

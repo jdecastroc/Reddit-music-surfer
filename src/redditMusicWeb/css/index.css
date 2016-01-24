@@ -3,8 +3,12 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50%;
+  height: 45%;
   overflow-y: scroll;
+}
+
+.glyphicon:before {
+  margin-right: 5px;
 }
 
 .form-inline > * {
@@ -36,4 +40,21 @@
   overflow-y: scroll;
   width: 100%;
   height: 45%;
+}
+
+.videowrapper {
+    float: none;
+    clear: both;
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+}
+.videowrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
