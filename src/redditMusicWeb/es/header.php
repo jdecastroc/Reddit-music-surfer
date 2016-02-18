@@ -10,15 +10,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Music surfer para Reddit</a>
+          <a class="navbar-brand" href="">Music surfer para Reddit</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="<?php echo "http://localhost/".$lang."/index.php"?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-            <li><a href="<?php echo "http://localhost/".$lang."/about.php"?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>About</a></li>
+            <li class="active"><a href="<?php echo "http://music4r.jdecastroc.ovh/".$lang."/index.php"?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li><a href=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>About</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class ="pull-right"><p class="navbar-btn"><a href="http://localhost/index.php" class="btn-info btn"><span class="glyphicon glyphicon-music" aria-hidden="true"></span>Nueva lista de reproducción!</a></p></li>
+            <li class ="pull-right"><p class="navbar-btn"><a href="http://music4r.jdecastroc.ovh/es/" class="btn-info btn"><span class="glyphicon glyphicon-music" aria-hidden="true"></span>Nueva lista de reproducción!</a></p></li>
 
           </ul>
         </div><!--/.nav-collapse -->
