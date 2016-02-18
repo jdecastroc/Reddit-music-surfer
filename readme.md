@@ -6,16 +6,17 @@ Through the selection of the different reddits, the application crawl the select
 music links and providing them to the application player.
 
 #Actual version: ALPHA v1.3
-#Link: http://51.255.202.84/
+I need to clean the code as I wanted to make it fast to check the functionality of the wep app.
+Link: http://jdecastroc.ovh/music4r/
 
 #Used technologies
 - Backend: Java, Spring, JSoup, GSON
-- Frontend: PHP, Javascript, html
+- Frontend: PHP, Javascript, html5, css
 
 The flow of the information between backend and frontend is given by a REST service using JSON format.
 
 #TO DO
-- Allow soundcloud links
+- Clean the code and the file distribution
 - Improve frontend visualization
 
 #Contact
